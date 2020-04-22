@@ -9,7 +9,10 @@ import {
 import {
     createPost
 } from "./api/posts/create";
-
+import {
+    deletePost
+} from "./api/posts/deletePost"
+import { updatePost } from "./api/posts/updatePost";
 const app = express();
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -20,10 +23,14 @@ app.use(bodyParser.json())
 
 //请求列表
 app.get("/posts", getPosts);
-//请求单个
+//请求详情
 app.get("/post/:id", getPostDetail);
-//发送单个
+//添加数据
 app.post("/post", createPost);
+//删除数据
+app.delete('/post/:id', deletePost)
+//更新数据
+app.put("/post/:id",updatePost)
 
 app.listen(process.env.PORT || 8090, () => {
     console.log("server start...")
